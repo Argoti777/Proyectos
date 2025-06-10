@@ -75,8 +75,16 @@ WSGI_APPLICATION = 'tesis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'NAME': 'Proyecto',  # nombre de la base de datos
+        'USER': 'sa',
+        'PASSWORD': '123456',
+        'HOST': 'LAPTOP-UL3Q8TE0',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trust_server_certificate': 'yes',
+        },
     }
 }
 
