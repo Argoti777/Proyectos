@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla de Posiciones</title>
+  <link rel="stylesheet" href="{% static 'principal/style.css' %}">
+</head>
+<body>
+
+  <div class="menu">
+    <div class="tab active" onclick="mostrarSeccion('posiciones')">Posiciones</div>
+    <div class="tab" onclick="mostrarSeccion('jugadores')">Jugadores</div>
+  </div>
+
+  <div class="contenido" id="posiciones">
+    <table class="tabla-posiciones">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Club</th>
+          <th>PJ</th>
+          <th>G</th>
+          <th>E</th>
+          <th>P</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Independiente</td><td>15</td><td>9</td><td>4</td><td>2</td><td>29</td><td>14</td><td>15</td><td>31</td></tr>
+        <tr><td>2</td><td>Barcelona SC</td><td>14</td><td>9</td><td>2</td><td>3</td><td>20</td><td>15</td><td>5</td><td>29</td></tr>
+        <tr><td>3</td><td>Aucas</td><td>15</td><td>7</td><td>4</td><td>4</td><td>22</td><td>16</td><td>6</td><td>25</td></tr>
+        <tr><td>4</td><td>LDU Quito</td><td>14</td><td>6</td><td>5</td><td>3</td><td>22</td><td>14</td><td>8</td><td>23</td></tr>
+        <tr><td>5</td><td>Dep. Cuenca</td><td>15</td><td>7</td><td>2</td><td>6</td><td>13</td><td>14</td><td>-1</td><td>23</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="contenido" id="jugadores" style="display:none;">
+    <h2>Máximos Goleadores</h2>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Pérez">
+      <div>
+        <strong>Juan Pérez</strong> <br>
+        LDU Quito – 12 goles
+      </div>
+    </div>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Romero">
+      <div>
+        <strong>Carlos Romero</strong> <br>
+        Barcelona SC – 10 goles
+      </div>
+    </div>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Javier Mendoza">
+      <div>
+        <strong>Javier Mendoza</strong> <br>
+        Aucas – 9 goles
+      </div>
+    </div>
+
+    <h2>Máximos Asistidores</h2>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Luis Gómez">
+      <div>
+        <strong>Luis Gómez</strong> <br>
+        Independiente – 8 asistencias
+      </div>
+    </div>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Andrés López">
+      <div>
+        <strong>Andrés López</strong> <br>
+        Orense – 7 asistencias
+      </div>
+    </div>
+    <div class="jugador">
+      <img src="https://randomuser.me/api/portraits/men/16.jpg" alt="Mario Ruiz">
+      <div>
+        <strong>Mario Ruiz</strong> <br>
+        U. Católica – 6 asistencias
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mostrarSeccion(seccion) {
+      document.getElementById('posiciones').style.display = (seccion === 'posiciones') ? 'block' : 'none';
+      document.getElementById('jugadores').style.display = (seccion === 'jugadores') ? 'block' : 'none';
+
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelector('.tab[onclick*="' + seccion + '"]').classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
+
