@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cuenta - Iniciar sesión / Registro</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="{% static 'principal/style.css' %}"/>
 </head>
 <body>
   <div class="login-container">
-    <h2>CHULLAGOL</h2>
-    <div class="logo">🍏</div>
+     <div class="text-center">
+      <img src="{% static 'principal/imagenes/logo2.png' %}" alt="Logo EcuaFut" height="40">
+    </div>
 
     <!-- Formulario de Inicio de Sesión -->
     <div id="login-form">
