@@ -99,6 +99,10 @@ footer {
   text-align: center;
   color: white;
   margin: auto;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .logo {

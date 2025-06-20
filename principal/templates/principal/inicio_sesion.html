@@ -18,37 +18,40 @@
     </div>
     <!-- Formulario de Inicio de Sesión -->
     <div id="login-form">
+      <h2></h2>
       <h2>Inicia sesión con tu cuenta</h2>
-      <input type="text" placeholder="Correo o número telefónico" />
-      <input type="password" placeholder="Contraseña" />
-      <button>Iniciar sesión</button>
+      <form method="post" action="{% url 'inicio_sesion' %}">
+      {% csrf_token %}
+      {{ login_form.as_p }}
+      <button type="submit" name="iniciar_sesion">Iniciar Sesión</button>
+      </form>
       <div class="options">
         <p><a href="#" onclick="mostrarRecuperar()">¿Olvidaste tu contraseña?</a></p>
 
-        <p><a href="#" onclick="mostrarRegistro()">Crear una cuenta nueva</a></p>
+        <p><a href="#" onclick="mostrarRegistro()">Crear cuenta</a></p>
       </div>
     </div>
 
     <!-- Formulario de Registro -->
     <div id="registro-form" style="display: none;">
-      <h2>Crea tu cuenta</h2>
-      <input type="text" placeholder="Nombre completo" />
-      <input type="email" placeholder="Correo electrónico" />
-      <input type="tel" placeholder="Número telefónico" />
-      <input type="password" placeholder="Contraseña" />
-      <input type="password" placeholder="Confirmar contraseña" />
-      <button>Registrarse</button>
-      <div class="options">
-        <p><a href="#" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</a></p>
-      </div>
-    </div>
+  <h2>Crea tu cuenta</h2>
+    <form method="post" action="{% url 'inicio_sesion' %}">
+      {% csrf_token %}
+      {{ registro_form.as_p }}
+      <button type="submit" name="registrarse">Registrarse</button>
+    </form>
+  <div class="options">
+    <p><a href="#" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</a></p>
+  </div>
+</div>
 
     <!-- Formulario de Recuperación de Contraseña -->
   <div id="recuperar-form" style="display: none;">
-      <h2>Recuperar contraseña</h2>
-      <p>Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
-      <input type="email" placeholder="Correo electrónico" />
-      <button>Enviar enlace</button>
+      <form method="post" action="{% url 'inicio_sesion' %}">
+  {% csrf_token %}
+  {{ recuperar_form.as_p }}
+  <button type="submit" name="recuperar">Enviar enlace</button>
+</form>
       <div class="options">
         <p><a href="#" onclick="mostrarLogin()">Volver al inicio de sesión</a></p>
       </div>
@@ -70,7 +73,7 @@
     document.getElementById("login-form").style.display = "block";
   }
 
-  function mostrarRegistro() {
+    function mostrarRegistro() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("recuperar-form").style.display = "none";
     document.getElementById("registro-form").style.display = "block";

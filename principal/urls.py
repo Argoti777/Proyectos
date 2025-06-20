@@ -9,5 +9,7 @@ urlpatterns = [
     path('inicio_sesion/', views.inicio_sesion, name='inicio_sesion'),
     path('detalle_partido/', views.detalle_partido, name='detalle_partido'),
     path('Estadisticas_campeonato/', views.Estadisticas_campeonato, name='Estadisticas_campeonato'),
+    path('cerrar_sesion/', views.cerrar_sesion, name='cerrar_sesion'),
 ]
+
 
