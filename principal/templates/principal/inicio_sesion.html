@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="{% static 'principal/style.css' %}">
 </head>
 <body>
+  <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 2000; min-width:320px; max-width:90vw;">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="toast align-items-center text-bg-{{ message.tags }} border-0 show mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
   <div class="login-container">
     <h2>CHULLAGOL</h2>
    <div class="text-center">
@@ -33,15 +48,22 @@
     </div>
 
     <!-- Formulario de Registro -->
-    <div id="registro-form" style="display: none;">
-  <h2>Crea tu cuenta</h2>
-    <form method="post" action="{% url 'inicio_sesion' %}">
-      {% csrf_token %}
-      {{ registro_form.as_p }}
-      <button type="submit" name="registrarse">Registrarse</button>
-    </form>
-  <div class="options">
-    <p><a href="#" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</a></p>
+<div id="registro-form" style="display: none;" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="text-center mb-4">Registrarse</h3>
+          <form method="POST">
+            {% csrf_token %}
+            {{ registro_form.as_p }}
+            <div class="d-grid mt-3">
+              <button type="submit" name="registrarse" class="btn btn-success">Crear cuenta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -59,7 +81,6 @@
 
   </div>
 
-  
 <script>
   function mostrarRecuperar() {
     document.getElementById("login-form").style.display = "none";
@@ -80,6 +101,15 @@
   }
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    toastElList.forEach(function (toastEl) {
+      var toast = new bootstrap.Toast(toastEl)
+      toast.show()
+    })
+  });
+</script>
 
 </body>
 </html>

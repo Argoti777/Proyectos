@@ -1,0 +1,43 @@
+{% load static %}
+<nav class="navbar glass-navbar">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Lado izquierdo -->
+    <div class="d-flex align-items-center">
+      <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-fill"></i> Home</a>
+      <a class="nav-link active" href="{% url 'campeonato' %}"><i class="bi bi-trophy-fill"></i> Campeonato</a>
+    </div>
+
+    <!-- Logo al centro -->
+    <div class="text-center">
+      <img src="{% static 'principal/imagenes/logo2.png' %}" alt="Logo EcuaFut" height="40">
+    </div>
+
+    <!-- Lado derecho -->
+    <div class="d-flex align-items-center">
+      {% if request.session.usuario_id %}
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> {{ request.session.usuario_nombre|default:"Usuario" }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'ayuda' %}"><i class="bi bi-question-lg"></i> Ayuda</a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item text-danger" href="{% url 'cerrar_sesion' %}">
+              <i class="bi bi-box-arrow-left"></i> Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+      {% else %}
+      <a href="{% url 'inicio_sesion' %}" class="btn btn-light btn-lg">Iniciar sesión</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

@@ -10,40 +10,25 @@
     <title>EcuaFut</title>
 </head>
 <body>
-      <!-- Aqui empieza nav bar -->
-  <nav class="navbar glass-navbar">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
 
-    <!-- Lado izquierdo -->
-<div class="d-flex align-items-center">
-  <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-fill"></i>  Home</a>
-  <a class="nav-link active" href="{% url 'campeonato' %}"><i class="bi bi-trophy-fill"></i>  Campeonato</a>
-  <a class="nav-link active" href="{% url 'Estadisticas_campeonato' %}"><i class="bi bi-bar-chart-fill"></i>  Estadisticas</i></a>
-</div>
-
-
-    <!-- Logo al centro -->
-    <div class="text-center">
-      <img src="{% static 'principal/imagenes/logo2.png' %}" alt="Logo EcuaFut" height="40">
-    </div>
-
-    <!-- Lado derecho -->
-   <div class="d-flex align-items-center">
-  <a class="nav-link active" href="{% url 'detalle_partido' %}"><i class="bi bi-life-preserver"></i>  Partidos</a>
-  <a class="nav-link active" href="#"><i class="bi bi-person-circle"></i> Jugadores</a>
-
-  {% if request.session.usuario_id %}
-      <span class="navbar-text me-2">
-          <i class="bi bi-person-circle"></i> {{ request.session.usuario_nombre }}
-      </span>
-      <a href="{% url 'cerrar_sesion' %}" class="btn btn-danger btn-lg">Cerrar sesión</a>
-  {% else %}
-      <a href="{% url 'inicio_sesion'%}" class="btn btn-light btn-lg">Iniciar sesión</a>
+ <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 2000; min-width:320px; max-width:90vw;">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="toast align-items-center text-bg-{{ message.tags }} border-0 show mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+      </div>
+    {% endfor %}
   {% endif %}
 </div>
-  </div>
-</nav>
-<!-- Aqui termina nav bar -->
+
+      <!-- Aqui empieza nav bar -->
+      {% include "principal/navbar.html" %}
+      <!-- Aqui termina nav bar -->
 
 
     <div class="container mt-5 text-center">
@@ -188,62 +173,17 @@
   </div>
 </section>
     <!-- FOOTER -->
-    <footer class="bg-dark text-white text-center text-lg-start mt-5 pt-4 pb-4">
-  <div class="container">
-    <div class="row">
-      <!-- Sobre EcuaFut -->
-      <div class="col-md-3 mb-4">
-        <h5>Sobre EcuaFut</h5>
-        <p>Plataforma para seguir campeonatos locales con estadísticas y resultados en tiempo real.</p>
-      </div>
-
-      <!-- Enlaces rápidos -->
-      <div class="col-md-3 mb-4">
-        <h5>Enlaces rápidos</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-chevron-right me-2"></i>Inicio</a></li>
-          <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-chevron-right me-2"></i>Campeonatos</a></li>
-          <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-chevron-right me-2"></i>Apuestas</a></li>
-          <li><a href="{% url 'ayuda' %}" class="text-white text-decoration-none"><i class="bi bi-chevron-right me-2"></i>Preguntas Frecuentes</a></li>
-        </ul>
-      </div>
-
-      <!-- Contacto -->
-      <div class="col-md-3 mb-4">
-        <h5>Contacto</h5>
-        <ul class="list-unstyled">
-          <li><i class="bi bi-envelope-fill me-2"></i> mrpsychoxd@ecuafut.com</li>
-          <li><i class="bi bi-telephone-fill me-2"></i> +593 987 654 321</li>
-          <li><i class="bi bi-geo-alt-fill me-2"></i> Quito, Ecuador</li>
-        </ul>
-      </div>
-
-      <!-- Redes sociales / Newsletter -->
-      <div class="col-md-3 mb-4">
-        <h5>Síguenos</h5>
-        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-5"></i></a>
-        <a href="#" class="text-white me-3"><i class="bi bi-twitter-x fs-5"></i></a>
-        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-5"></i></a>
-        <hr class="bg-light my-3">
-        <h6>Suscríbete</h6>
-        <form class="d-flex flex-column gap-2">
-          <input type="email" class="form-control form-control-sm" placeholder="Tu correo">
-          <button class="btn btn-outline-light btn-sm" type="submit">Suscribirse</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <hr class="bg-secondary my-3 mx-4">
-  <div class="text-center">
-    <small>© 2025 EcuaFut. Todos los derechos reservados.</small>
-  </div>
-</footer>
-
-    <!-- ✅ Bootstrap JS (opcional, para cosas interactivas como modales o navbar)         
-     
-    <h1 class="display-4">Noticias</h1>
-
-        <a href="#" class="btn btn-primary btn-lg mt-4">Comenzar</a> -->
+   {% include "principal/footer.html" %}
+    <!-- FOOTER -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    toastElList.forEach(function (toastEl) {
+      var toast = new bootstrap.Toast(toastEl)
+      toast.show()
+    })
+  });
+</script>
 </body>
 </html>

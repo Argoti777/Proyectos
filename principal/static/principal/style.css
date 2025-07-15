@@ -81,8 +81,13 @@ footer {
 
 /* ==== SECCIONES ==== */
 .section-partidos,
-.section-tabla {
+.section-tabla{
   background: #003f2d;
+}
+.noticias {
+  background: #003f2d !important;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* ==== LOGIN ==== */

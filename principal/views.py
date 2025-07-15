@@ -22,6 +22,16 @@ def estadisticas_partido(request):
 def Estadisticas_campeonato(request):
     return render(request, 'principal/Estadisticas_campeonato.html')
 
+def base(request):
+    return render(request,'principal/base.html')
+
+def navbar(request):
+    return render(request,'principal/navbar.html')
+
+def footer(request):
+    return render(request,'principal/footer.html')
+
+
 # Create your views here.
 
 from .forms import *

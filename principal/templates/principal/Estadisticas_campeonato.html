@@ -8,6 +8,8 @@
 </head>
 <body>
 
+  {% include "principal/navbar.html" %}
+
   <div class="menu">
     <div class="tab active" onclick="mostrarSeccion('posiciones')">Posiciones</div>
     <div class="tab" onclick="mostrarSeccion('jugadores')">Jugadores</div>
@@ -96,6 +98,9 @@
       document.querySelector('.tab[onclick*="' + seccion + '"]').classList.add('active');
     }
   </script>
+
+
+{% include "principal/footer.html" %}
 
 </body>
 </html>
