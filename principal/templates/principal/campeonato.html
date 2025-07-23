@@ -13,7 +13,65 @@
 {% include "principal/navbar.html" %}
 <!-- Aqui termina nav bar -->
 
+<main class="container">
+    <!--Seccion de ligas-->
+    <section id="Ligas" class="noticias">
+        <h1 style="text-align: center;">Ligas</h1>
+        <input type="text" id="searchLiga" class="search-box" placeholder="Buscar liga..." onkeyup="filtrar('searchLiga','item-liga')">
+        <div class="container" style="text-align:center;">
+                {% for liga in ligas %}
+                    <p>{{ liga.nombre }} - {{ liga.ciudad }}</p>
+                {% empty %}
+                    <p>No hay ligas registradas.</p>
+                {% endfor %}
+        </div>
+    </section>
 
+    <!--Equipos-->
+    <section id="equipos" class="noticias">
+            <h1 style="text-align:center; margin: 30px 0;">Equipos</h1>
+            <div class="container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+                {% for equipo in equipos %}
+                    <div class="custom-card" style="width:200px; text-align:center; padding:10px;">
+                        {% if equipo.logo %}
+                            <img src="{{ equipo.logo.url }}" alt="Logo" style="width:100px; height:100px; object-fit:contain; display:block; margin:auto;">
+                        {% else %}
+                            <img src="{% static 'img/equipos/default.png' %}" alt="Logo por defecto" style="width:100px; height:100px; object-fit:cover;">
+                        {% endif %}
+                        <h3>{{ equipo.nombre }}</h3>
+                        <p>{{ equipo.ciudad }}</p>
+                        <p>Liga: {{ equipo.liga.nombre }}</p>
+                    </div>
+                {% empty %}
+                    <p>No hay equipos registrados.</p>
+                {% endfor %}
+            </div>
+        </section>
+  
+
+    <!--Jugadores-->
+    <section id="jugadores" class="noticias">
+            <h1 style="text-align:center; margin: 30px 0;">Jugadores</h1>
+            <div class="container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+                {% for jugador in jugadores %}
+                    <div class="custom-card" style="width:180px; text-align:center; padding:10px;">
+                        {% if jugador.foto %}
+                            <img src="{{ jugador.foto.url }}" alt="Jugador" style="width:90px; height:90px; object-fit:cover; border-radius:50%; display:block; margin:auto;">
+                        {% else %}
+                            <img src="{% static 'img/jugadores/default.png' %}" alt="Jugador por defecto" style="width:90px; height:90px; border-radius:50%; object-fit:cover;">
+                        {% endif %}
+                        <h4>{{ jugador.nombre }} {{ jugador.apellido }}</h4>
+                        <p>Equipo: {{ jugador.equipo.nombre }}</p>
+                        <p>Posición: {{ jugador.posicion }}</p>
+                    </div>
+                {% empty %}
+                    <p>No hay jugadores registrados.</p>
+                {% endfor %}
+            </div>
+    </section>
+  
+
+</main>
 
 <!-- Aqui empeiza footer -->
 {% include "principal/footer.html" %}

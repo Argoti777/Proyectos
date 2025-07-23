@@ -57,7 +57,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     ciudad = models.CharField(max_length=100)
     liga = models.ForeignKey(Liga, on_delete=models.CASCADE, related_name='equipos')
-
+    logo = models.ImageField(upload_to='equipos/', null=True, blank=True)
     class Meta:
         db_table = "Equipos"
 
@@ -71,7 +71,7 @@ class Jugador(models.Model):
     edad = models.IntegerField()
     posicion = models.CharField(max_length=50)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='jugadores')
-
+    foto = models.ImageField(upload_to='jugadores/', null=True, blank=True)
     class Meta:
         db_table = "Jugadores"
 
