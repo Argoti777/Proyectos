@@ -22,15 +22,14 @@ def estadisticas_partido(request):
 def Estadisticas_campeonato(request):
     return render(request, 'principal/Estadisticas_campeonato.html')
 
-def base(request):
-    return render(request,'principal/base.html')
-
 def navbar(request):
     return render(request,'principal/navbar.html')
 
 def footer(request):
     return render(request,'principal/footer.html')
 
+def perfil(request):
+    return render(request,'principal/perfil.html')
 
 # Create your views here.
 
@@ -89,4 +88,21 @@ def cerrar_sesion(request):
     request.session.flush()
     return redirect('home')
 
-    
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .models import Perfil
+from .forms import PerfilForm
+
+def perfil(request):
+    # Obtener o crear el perfil del usuario autenticado
+    perfil, creado = Perfil.objects.get_or_create(usuario=request.user)
+
+    if request.method == 'POST':
+        perfil_form = PerfilForm(request.POST, request.FILES, instance=perfil)
+        if perfil_form.is_valid():
+            perfil_form.save()
+            return redirect('perfil')  # O donde quieras redirigir después de guardar
+    else:
+        perfil_form = PerfilForm(instance=perfil)
+
+    return render(request, "principal/perfil.html", {"perfil_form": perfil_form})

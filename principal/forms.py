@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario
+from .models import *
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
@@ -24,5 +24,10 @@ class LoginForm(forms.Form):
 
 class RecuperarForm(forms.Form):
     correo = forms.EmailField()
+
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['nombre_completo', 'fecha_nacimiento', 'genero']
 
 

@@ -2,25 +2,25 @@
 body {
   background-color: #007A33;
   font-family: 'Teko', sans-serif;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
   padding: 0;
 }
 
-h1 {
-  color: #ffffff;
+h1, .login-container h2 {
+  color: #fff;
 }
 
 /* ==== NAVBAR ==== */
 .glass-navbar {
-  font-family: 'Teko', sans-serif;
-  background: rgba(255, 255, 255, 0.08);
+  font-family: inherit;
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 16px;
   padding: 12px 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   width: 90%;
   max-width: 1100px;
   margin: 20px auto;
@@ -28,11 +28,11 @@ h1 {
 
 .navbar-nav .nav-link,
 .nav-link {
-  color: white !important;
+  color: #fff !important;
   font-weight: 500;
   margin-right: 16px;
   font-size: 1.5rem !important;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .navbar-nav .nav-link:hover {
@@ -40,36 +40,36 @@ h1 {
 }
 
 .dropdown-menu {
-  background-color: rgba(255, 255, 255, 0.95);
+  background: rgba(255,255,255,0.95);
   border-radius: 8px;
   border: none;
 }
 
 .dropdown-item {
-  color: black;
+  color: #000;
 }
 
 .dropdown-item:hover {
-  background-color: rgba(55, 255, 0, 0.1);
+  background: rgba(55,255,0,0.1);
 }
 
 /* ==== FOOTER ==== */
 footer {
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
 /* ==== TARJETAS ==== */
 .custom-card {
-  background-color: #121212;
+  background: #121212;
   color: #fff;
   border-radius: 12px;
   border: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 
 .custom-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.2);
 }
 
 .card img {
@@ -77,32 +77,30 @@ footer {
   object-fit: cover;
 }
 
-/* ajustes de inicio */
-
-/* ==== SECCIONES ==== */
+/* ==== SECCIONES GENERALES ==== */
 .section-partidos,
-.section-tabla{
-  background: #003f2d;
-}
+.section-tabla,
 .noticias {
   background: #003f2d !important;
-  padding-left: 20px;
-  padding-right: 20px;
+}
+
+.noticias {
+  padding: 0 20px;
 }
 
 /* ==== LOGIN ==== */
 .login-container {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   padding: 40px;
-  width: 100%;
   max-width: 400px;
+  width: 100%;
   text-align: center;
-  color: white;
+  color: #fff;
   margin: auto;
   position: absolute;
   top: 45%;
@@ -115,46 +113,25 @@ footer {
   margin-bottom: 20px;
 }
 
-.login-container h2 {
-  color: #ffffff;
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
 input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255,255,255,0.7);
 }
 
 button {
   width: 100%;
   padding: 12px;
   margin-top: 20px;
-  background-color: #003f2d;
-  color: white;
+  background: #003f2d;
+  color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s, transform 0.2s;
 }
 
 button:hover {
-  background-color: #005540;
+  background: #005540;
   transform: scale(1.02);
 }
 
@@ -186,8 +163,8 @@ button:hover {
 .tabla-partidos {
   max-width: 800px;
   margin: auto;
-  background-color: white;
-  color: black;
+  background: #fff;
+  color: #000;
   border-radius: 10px;
   box-shadow: 0 0 10px #ccc;
   padding: 20px;
@@ -196,8 +173,7 @@ button:hover {
 .fecha {
   font-weight: bold;
   font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 20px 0 10px 0;
   border-bottom: 1px solid #ddd;
   padding-bottom: 5px;
 }
@@ -207,7 +183,7 @@ button:hover {
   justify-content: space-between;
   margin: 8px 0;
   padding: 10px;
-  background-color: #fafafa;
+  background: #fafafa;
   border: 1px solid #eee;
   border-radius: 5px;
 }
@@ -233,12 +209,12 @@ button:hover {
 
 /* ==== ESTADÍSTICAS PARTIDO ==== */
 .estadisticas-container {
-  background-color: white;
+  background: #fff;
   max-width: 800px;
   margin: auto;
   padding: 20px;
   border-radius: 10px;
-  color: black;
+  color: #000;
 }
 
 .estadisticas-container h2 {
@@ -266,19 +242,12 @@ button:hover {
   height: auto;
 }
 
-.equipo-estadisticas p {
+.equipo-estadisticas p,
+.equipo-estadisticas .goles {
   margin: 8px 0 4px 0;
   font-weight: bold;
-}
-
-.equipo-estadisticas .goles {
-  margin-top: 6px;
   font-size: 13px;
   color: #444;
-}
-
-.equipo-estadisticas .goles p {
-  margin: 2px 0;
 }
 
 .resultado-estadisticas {
@@ -313,12 +282,12 @@ button:hover {
   margin: 6px 0;
 }
 
-/* ==== TABLA DE POSICIONES MEJORADA ==== */
+/* ==== TABLA DE POSICIONES ==== */
 .tabla-posiciones {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 8px;
-  color: white;
+  color: #fff;
   background: transparent;
 }
 
@@ -327,11 +296,11 @@ button:hover {
   padding: 12px 16px;
   text-align: center;
   font-size: 16px;
-  background-color: #006c2d;
+  background: #006c2d;
 }
 
 .tabla-posiciones th {
-  background-color: #005a25;
+  background: #005a25;
   color: #c2ffdf;
   text-transform: uppercase;
   font-size: 14px;
@@ -341,18 +310,17 @@ button:hover {
 
 .tabla-posiciones tbody tr {
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .tabla-posiciones tbody tr td {
-  background-color: #007a33;
+  background: #007a33;
   border: none;
 }
 
 .tabla-posiciones tbody tr:hover td {
-  background-color: #00a74f;
-  transition: background-color 0.2s ease-in-out;
+  background: #00a74f;
+  transition: background 0.2s;
 }
 
 .tabla-posiciones .equipo-cell {

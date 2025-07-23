@@ -15,6 +15,27 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Perfil(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='perfil')
+    nombre_completo = models.CharField(max_length=150, blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+    genero = models.CharField(
+        max_length=20,
+        choices=[
+            ('masculino', 'Masculino'),
+            ('femenino', 'Femenino'),
+            ('otro', 'Otro'),
+            ('notsay', 'Prefiero no decirlo')
+        ],
+        blank=True
+    )
+
+    class Meta:
+        db_table = "Perfiles"
+
+    def __str__(self):
+        return f"Perfil de {self.usuario.nombre}"
 
 
 class Liga(models.Model):
