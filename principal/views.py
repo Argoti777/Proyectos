@@ -106,3 +106,17 @@ def perfil(request):
         perfil_form = PerfilForm(instance=perfil)
 
     return render(request, "principal/perfil.html", {"perfil_form": perfil_form})
+
+#Prueba de paso de datos de campeonato
+from django.shortcuts import render
+from .models import Jugador, Equipo, Liga
+
+def campeonato(request):
+    jugadores = Jugador.objects.all()
+    equipos = Equipo.objects.all()
+    ligas = Liga.objects.all()
+    return render(request, 'principal/campeonato.html', {
+        'jugadores': jugadores,
+        'equipos': equipos,
+        'ligas': ligas,
+    })
