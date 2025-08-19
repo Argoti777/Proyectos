@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'Proyecto',  # nombre de la base de datos
         'USER': 'sa',
         'PASSWORD': '123456',
-        'HOST': 'DESKTOP-8V6SKMC\SQLEXPRESS',
+        'HOST': 'LAPTOP-UL3Q8TE0',
         'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',

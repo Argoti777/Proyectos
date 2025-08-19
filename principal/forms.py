@@ -3,20 +3,28 @@ from .models import *
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
-class RegistroForm(forms.ModelForm):
-    confirmar_contraseña = forms.CharField(widget=forms.PasswordInput())
 
+class crearLigaForm(forms.ModelForm):
     class Meta:
-        model = Usuario
-        fields = ['nombre', 'correo', 'numero', 'contraseña']
-        widgets = {'contraseña': forms.PasswordInput()}
+        model = Liga
+        fields = ['nombre', 'pais', 'ciudad', 'fecha_inicio', 'fecha_fin']
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+        }
 
-    def clean_confirmar_contraseña(self):
-        contraseña = self.cleaned_data.get("contraseña")
-        confirmar = self.cleaned_data.get("confirmar_contraseña")
-        if contraseña and confirmar and contraseña != confirmar:
-            raise forms.ValidationError("Las contraseñas no coinciden.")
-        return confirmar
+class crearEquipoForm(forms.ModelForm):
+    class Meta:
+        model = Equipo
+        fields = ['nombre', 'ciudad', 'liga', 'logo']
+
+class crearJugadorForm(forms.ModelForm):
+    class Meta:
+        model = Jugador
+        fields = ['nombre', 'apellido', 'edad', 'posicion', 'equipo', 'foto']
+        
+
+
 
 class LoginForm(forms.Form):
     correo_o_numero = forms.CharField()
@@ -25,9 +33,5 @@ class LoginForm(forms.Form):
 class RecuperarForm(forms.Form):
     correo = forms.EmailField()
 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = ['nombre_completo', 'fecha_nacimiento', 'genero']
 
 
