@@ -149,190 +149,260 @@ button:hover {
   text-decoration: underline;
 }
 
-/* ==== DETALLE DE PARTIDOS ==== */
-.detalle-wrapper {
-  padding: 20px;
+/* ==== BUSCADOR PERSONALIZADO ==== */
+.search-container {
+    position: relative;
+    width: 100%;
 }
 
-.detalle-wrapper h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
+.search-container input[type="text"] {
+    width: 100%;
+    padding: 10px 15px 10px 45px; 
+    border-radius: 50px; 
+    border: none; 
+    background-color: #fff; 
+    color: #333; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    outline: none; 
+    transition: all 0.3s ease;
+    font-size: 1rem; 
+    font-family: 'Teko', sans-serif; 
 }
 
-.tabla-partidos {
-  max-width: 800px;
-  margin: auto;
-  background: #fff;
-  color: #000;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
-  padding: 20px;
+.search-container input[type="text"]::placeholder {
+    color: #a0a0a0; 
 }
 
-.fecha {
-  font-weight: bold;
-  font-size: 18px;
-  margin: 20px 0 10px 0;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+.search-container input[type="text"]:focus {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
 }
 
-.partido-detalle {
-  display: flex;
-  justify-content: space-between;
-  margin: 8px 0;
-  padding: 10px;
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 5px;
+.search-container .search-icon {
+    position: absolute;
+    left: 15px; /* Posicionar el ícono a la izquierda */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d; 
+    pointer-events: none; 
+    font-size: 1.2rem; 
 }
 
-.equipo-detalle {
-  width: 40%;
-  text-align: left;
+/* Ajustes para el tamaño del h1 y otros titulos */
+h1 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #fff; 
 }
 
-.resultado-detalle {
-  width: 10%;
-  text-align: center;
-  font-weight: bold;
+.search-container input[type="text"] {
+    font-size: 1rem !important; 
 }
 
-.total-detalle {
-  width: 100%;
-  text-align: right;
-  font-style: italic;
-  font-size: 14px;
-  margin-top: 5px;
+
+/* ==== GRID PARA LISTADOS (Ligas, Equipos, Jugadores) ==== */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* ==== ESTADÍSTICAS PARTIDO ==== */
-.estadisticas-container {
-  background: #fff;
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 10px;
-  color: #000;
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
 
-.estadisticas-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
+@media (min-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
 
-.marcador-estadisticas {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  text-align: center;
-  margin-bottom: 20px;
+/* ==== TARJETAS DE CAMPEONATO (custom-card) ==== */
+.custom-card {
+    background: #121212;
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.3s ease-in-out;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
 }
 
-.equipo-estadisticas {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.custom-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,255,100,0.3);
 }
 
-.equipo-estadisticas img {
-  width: 80px;
-  height: auto;
+.custom-card h3 {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    line-height: 1.2;
 }
 
-.equipo-estadisticas p,
-.equipo-estadisticas .goles {
-  margin: 8px 0 4px 0;
-  font-weight: bold;
-  font-size: 13px;
-  color: #444;
+.custom-card h4 {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    line-height: 1.2;
 }
 
-.resultado-estadisticas {
-  font-size: 30px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.custom-card p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #bbb;
 }
 
-.finalizado {
-  text-align: center;
-  color: green;
-  font-weight: bold;
-  margin-bottom: 20px;
+.custom-card img {
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.estadisticas {
-  display: flex;
-  justify-content: center;
-  gap: 100px;
-  margin-top: 30px;
+.custom-card img[alt="Jugador"],
+.custom-card img[alt="Jugador por defecto"] {
+    border-radius: 50%;
 }
 
-.col-local,
-.col-visitante {
-  width: 48%;
+/* CASA DE APUESTAS CHULLAGOL */
+/* Tipografía general */
+body.chullagol-body {
+    font-family: 'Teko', sans-serif;
+    background-color: #007A33;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
-.col-local p,
-.col-visitante p {
-  margin: 6px 0;
+/* Contenedor principal */
+.chullagol-container {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
 }
 
-/* ==== TABLA DE POSICIONES ==== */
-.tabla-posiciones {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  color: #fff;
-  background: transparent;
+/* Área principal de partidos */
+.chullagol-main {
+    flex: 2;
 }
 
-.tabla-posiciones th,
-.tabla-posiciones td {
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 16px;
-  background: #006c2d;
+/* Aside derecho */
+.chullagol-aside {
+    flex: 1;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 300px;
+    height: fit-content;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
-.tabla-posiciones th {
-  background: #005a25;
-  color: #c2ffdf;
-  text-transform: uppercase;
-  font-size: 14px;
-  border: none;
-  border-bottom: 2px solid #ffffff33;
+/* Tarjetas de partidos */
+.chullagol-card {
+    background-color: #000000;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 255, 115, 0.2);
 }
 
-.tabla-posiciones tbody tr {
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+/* Título de secciones */
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 
-.tabla-posiciones tbody tr td {
-  background: #007a33;
-  border: none;
+/* Información del partido */
+.match-info h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+.match-info p {
+    color: #cccccc;
+    font-size: 1rem;
 }
 
-.tabla-posiciones tbody tr:hover td {
-  background: #00a74f;
-  transition: background 0.2s;
+/* Opciones de apuestas */
+.chullagol-betting-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 10px;
+}
+.chullagol-bet-option {
+    flex: 1;
+    min-width: 150px;
 }
 
-.tabla-posiciones .equipo-cell {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
+.chullagol-bet-amount {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
 }
 
-.tabla-posiciones .equipo-cell img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  border-radius: 50%;
+/* Botones de apostar */
+.chullagol-bet-button,
+.bet-button {
+    width: 100%;
+    background-color: #0d463c;
+    color: #f8f8f8;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.chullagol-bet-button:hover,
+.bet-button:hover {
+    background-color: #256839;
+}
+
+/* Boletín de apuestas */
+#slip-items {
+    margin-top: 15px;
+}
+
+.chullagol-slip-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.1rem;
+}
+
+.chullagol-empty-slip {
+    font-style: italic;
+    color: #777;
+}
+
+/* Total apuestas */
+.chullagol-slip-total {
+    border-top: 1px solid #444;
+    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 1.2rem;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .chullagol-container {
+        flex-direction: column;
+    }
 }

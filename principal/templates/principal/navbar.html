@@ -2,39 +2,45 @@
 <nav class="navbar glass-navbar">
   <div class="container-fluid d-flex justify-content-between align-items-center">
 
-    <!-- Lado izquierdo -->
-    <div class="d-flex align-items-center">
-      <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-fill"></i> Home</a>
-      <a class="nav-link active" href="{% url 'campeonato' %}"><i class="bi bi-trophy-fill"></i> Campeonato</a>
+  <div class="d-flex align-items-center">
+  <a class="nav-link active" href="{% url 'home' %}">
+    <i class="bi bi-house-fill"></i> Home
+  </a>
 
-          <!-- CAMPEONATO Dropdown -->
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
-          <i class="bi bi-trophy-fill"></i> Campeonato
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'campeonato' %}#ligas">Ligas</a></li>
-          <li><a class="dropdown-item" href="{% url 'campeonato' %}#jugadores">Jugadores</a></li>
-          <li><a class="dropdown-item" href="{% url 'campeonato' %}#equipos">Equipos</a></li>
-        </ul>
-      </div>
-    </div>
+  <div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-trophy-fill"></i> Campeonato
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#" onclick="navigateToCampeonato('ligas')">Ligas</a></li>
+      <li><a class="dropdown-item" href="#" onclick="navigateToCampeonato('jugadores')">Jugadores</a></li>
+      <li><a class="dropdown-item" href="#" onclick="navigateToCampeonato('equipos')">Equipos</a></li>
+    </ul>
+  </div>
+  <!-- OPCION DE CASA DE APUESTAS CHULLAGOL -->
+   {% if request.session.usuario_id %}
+    <a class="nav-link text-white" href="{% url 'chullagol' %}">
+      <i class="bi bi-currency-dollar"></i> ChullaGol
+    </a>
+    {% endif %}
+</div>
 
-    <!-- Logo al centro -->
+ 
+
+
     <div class="text-center">
       <img src="{% static 'principal/imagenes/logo2.png' %}" alt="Logo EcuaFut" height="40">
     </div>
 
-    <!-- Lado derecho -->
     <div class="d-flex align-items-center">
       {% if request.session.usuario_id %}
       <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-person-circle"></i> {{ request.session.usuario_nombre|default:"Usuario" }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
-            <a class="dropdown-item" href="{% url 'perfil' %}"><i class="bi bi-person-fill"></i> Perfil</a>
+            <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a>
           </li>
           <li>
             <a class="dropdown-item" href="{% url 'ayuda' %}"><i class="bi bi-question-lg"></i> Ayuda</a>
@@ -53,3 +59,34 @@
     </div>
   </div>
 </nav>
+
+<script>
+    function navigateToCampeonato(section) {
+        // Obtenemos la ruta actual sin el origen (ej. /campeonato/)
+        const currentPath = window.location.pathname;
+
+        // Verificamos si la URL actual termina con 'campeonato/' o 'campeonato'
+        // Esto cubre casos como '/campeonato/' o '/campeonato'
+        if (currentPath.endsWith('/campeonato/') || currentPath.endsWith('/campeonato')) {
+            // Si ya estamos en la página de campeonato, solo mostramos la sección
+            // 'mostrarSeccion' debe ser una función global o estar en el mismo scope.
+            // En tu caso, está en campeonato.html y será accesible una vez cargada la página.
+            mostrarSeccion(section);
+            // Actualizamos el hash de la URL sin recargar la página.
+            history.pushState(null, '', '#' + section);
+        } else {
+            // Si no estamos en la página de campeonato, navegamos a ella con el hash
+            window.location.href = "{% url 'campeonato' %}" + '#' + section;
+        }
+        // Opcional: Cerrar el menú desplegable de Bootstrap después de hacer clic
+        // Esto ayuda a que el menú no se quede abierto
+        const dropdownElement = document.querySelector('.nav-item.dropdown .dropdown-toggle');
+        if (dropdownElement) {
+            const bsDropdown = bootstrap.Dropdown.getInstance(dropdownElement);
+            if (bsDropdown) {
+                bsDropdown.hide();
+            }
+        }
+        
+    }
+</script>

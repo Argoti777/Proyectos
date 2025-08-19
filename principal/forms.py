@@ -29,5 +29,3 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['nombre_completo', 'fecha_nacimiento', 'genero']
-
-
