@@ -11,21 +11,25 @@
     <title>EcuaFut</title>
 </head>
 
-<h1>Nuevo inicio de sesion</h1>
+<body>
+    <!-- Aqui empieza nav bar -->
+    {% include "principal/navbar_admin.html" %}
+    <!-- Aqui termina nav bar -->
 
-{{error}}
-<div>
-    <div class="login-container">
-        <form action="/signup/" method="post">
+    <h1>Aqui podremos crear Ligas, equipos, jugadores</h1>
+
+    <div>
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Registrar usuario</button>
+            <button type="submit" class="btn btn-primary">Crear jugador</button>
         </form>
     </div>
-</div>
 
+    <!-- FOOTER -->
+    {% include "principal/footer.html" %}
+    <!-- FOOTER -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

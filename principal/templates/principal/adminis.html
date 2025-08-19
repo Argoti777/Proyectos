@@ -11,21 +11,19 @@
     <title>EcuaFut</title>
 </head>
 
-<h1>Nuevo inicio de sesion</h1>
+<body>
+    <!-- Aqui empieza nav bar -->
+    {% include "principal/navbar_admin.html" %}
+    <!-- Aqui termina nav bar -->
 
-{{error}}
-<div>
-    <div class="login-container">
-        <form action="/signup/" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Registrar usuario</button>
-        </form>
-    </div>
-</div>
+    <h1>Aqui podremos administrar todo</h1>
 
+   
+
+    <!-- FOOTER -->
+    {% include "principal/footer.html" %}
+    <!-- FOOTER -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
