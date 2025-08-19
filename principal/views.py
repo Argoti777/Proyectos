@@ -120,3 +120,10 @@ def campeonato(request):
         'equipos': equipos,
         'ligas': ligas,
     })
+
+def chullagol(request):
+    # Aquí puedes implementar la lógica para la casa de apuestas ChullaGol
+    return render(request, 'principal/chullagol.html')
+
+
+   

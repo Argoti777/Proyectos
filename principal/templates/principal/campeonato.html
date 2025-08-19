@@ -2,81 +2,208 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <title>Campeonato - EcuaFut</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'principal/style.css' %}">
-    <meta charset="UTF-8">
-    <title>Campeonato - EcuaFut</title>
 </head>
-    <body>
-{% include "principal/navbar.html" %}
-<!-- Aqui termina nav bar -->
+<body>
+    {% include 'principal/navbar.html' %}
 
-<main class="container">
-    <!--Seccion de ligas-->
-    <section id="Ligas" class="noticias">
-        <h1 style="text-align: center;">Ligas</h1>
-        <input type="text" id="searchLiga" class="search-box" placeholder="Buscar liga..." onkeyup="filtrar('searchLiga','item-liga')">
-        <div class="container" style="text-align:center;">
+    <main class="container">
+        <div class="row mb-4 justify-content-center">
+            <div class="col-md-6 col-lg-4"> {# Mantiene el control del ancho general con Bootstrap #}
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar ligas, equipos o jugadores..." aria-label="Buscar">
+                    <i class="bi bi-search search-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <section id="ligas">
+            <h1>Ligas</h1>
+            <div class="grid-container" id="ligasContainer">
                 {% for liga in ligas %}
-                    <p>{{ liga.nombre }} - {{ liga.ciudad }}</p>
+                    <div class="custom-card" data-nombre="{{ liga.nombre|default:""|lower }}">
+                        <h3>{{ liga.nombre }}</h3>
+                        <p>{{ liga.ciudad }}</p>
+                    </div>
                 {% empty %}
+                    <p class="no-results" id="noLigasFound" style="display:none;">No se encontraron ligas.</p>
                     <p>No hay ligas registradas.</p>
                 {% endfor %}
-        </div>
-    </section>
+            </div>
+        </section>
 
-    <!--Equipos-->
-    <section id="equipos" class="noticias">
-            <h1 style="text-align:center; margin: 30px 0;">Equipos</h1>
-            <div class="container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+        <section id="equipos" style="display:none;">
+            <h1>Equipos</h1>
+            <div class="grid-container" id="equiposContainer">
                 {% for equipo in equipos %}
-                    <div class="custom-card" style="width:200px; text-align:center; padding:10px;">
+                    <div class="custom-card"
+                         data-nombre="{{ equipo.nombre|default:""|lower }}"
+                         data-liga="{{ equipo.liga.nombre|default:""|lower }}">
                         {% if equipo.logo %}
-                            <img src="{{ equipo.logo.url }}" alt="Logo" style="width:100px; height:100px; object-fit:contain; display:block; margin:auto;">
+                            <img src="{{ equipo.logo.url }}" alt="Logo" style="width:80px; height:80px; object-fit:contain; margin-bottom: 10px;">
                         {% else %}
-                            <img src="{% static 'img/equipos/default.png' %}" alt="Logo por defecto" style="width:100px; height:100px; object-fit:cover;">
+                            <img src="{% static 'img/equipos/default.png' %}" alt="Logo por defecto" style="width:80px; height:80px; object-fit:contain; margin-bottom: 10px;">
                         {% endif %}
                         <h3>{{ equipo.nombre }}</h3>
                         <p>{{ equipo.ciudad }}</p>
                         <p>Liga: {{ equipo.liga.nombre }}</p>
                     </div>
                 {% empty %}
+                    <p class="no-results" id="noEquiposFound" style="display:none;">No se encontraron equipos.</p>
                     <p>No hay equipos registrados.</p>
                 {% endfor %}
             </div>
         </section>
-  
 
-    <!--Jugadores-->
-    <section id="jugadores" class="noticias">
-            <h1 style="text-align:center; margin: 30px 0;">Jugadores</h1>
-            <div class="container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+        <section id="jugadores" style="display:none;">
+            <h1>Jugadores</h1>
+            <div class="grid-container" id="jugadoresContainer">
                 {% for jugador in jugadores %}
-                    <div class="custom-card" style="width:180px; text-align:center; padding:10px;">
+                    <div class="custom-card"
+                         data-nombre="{{ jugador.nombre|default:""|lower }} {{ jugador.apellido|default:""|lower }}"
+                         data-equipo="{{ jugador.equipo.nombre|default:""|lower }}"
+                         data-posicion="{{ jugador.posicion|default:""|lower }}">
                         {% if jugador.foto %}
-                            <img src="{{ jugador.foto.url }}" alt="Jugador" style="width:90px; height:90px; object-fit:cover; border-radius:50%; display:block; margin:auto;">
+                            <img src="{{ jugador.foto.url }}" alt="Jugador" style="width:70px; height:70px; border-radius:50%; object-fit:cover; margin-bottom: 10px;">
                         {% else %}
-                            <img src="{% static 'img/jugadores/default.png' %}" alt="Jugador por defecto" style="width:90px; height:90px; border-radius:50%; object-fit:cover;">
+                            <img src="{% static 'img/jugadores/default.png' %}" alt="Jugador por defecto" style="width:70px; height:70px; border-radius:50%; object-fit:cover; margin-bottom: 10px;">
                         {% endif %}
                         <h4>{{ jugador.nombre }} {{ jugador.apellido }}</h4>
                         <p>Equipo: {{ jugador.equipo.nombre }}</p>
                         <p>Posición: {{ jugador.posicion }}</p>
                     </div>
                 {% empty %}
+                    <p class="no-results" id="noJugadoresFound" style="display:none;">No se encontraron jugadores.</p>
                     <p>No hay jugadores registrados.</p>
                 {% endfor %}
             </div>
-    </section>
-  
+        </section>
+    </main>
 
-</main>
+    {% include 'principal/footer.html' %}
 
-<!-- Aqui empeiza footer -->
-{% include "principal/footer.html" %}
-    </body>
+    <script>
+        function mostrarSeccion(seccion) {
+            const secciones = ['ligas', 'equipos', 'jugadores'];
+            secciones.forEach(id => {
+                document.getElementById(id).style.display = (id === seccion) ? 'block' : 'none';
+            });
+            const dropdownElement = document.querySelector('.nav-item.dropdown .dropdown-toggle');
+            if (dropdownElement) {
+                const bsDropdown = bootstrap.Dropdown.getInstance(dropdownElement);
+                if (bsDropdown) {
+                    bsDropdown.hide();
+                }
+            }
+            document.getElementById('searchInput').value = '';
+            filterItems();
+        }
+
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            // Ligas
+            const ligasContainer = document.getElementById('ligasContainer');
+            const ligas = ligasContainer.querySelectorAll('.custom-card');
+            let ligasVisible = 0;
+            let initialLigasMessage = ligasContainer.querySelector('p:not(.no-results)');
+            
+            ligas.forEach(card => {
+                const nombreLiga = card.dataset.nombre || '';
+                if (nombreLiga.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    ligasVisible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            if (ligas.length === 0) {
+                document.getElementById('noLigasFound').style.display = 'none';
+                if (initialLigasMessage) initialLigasMessage.style.display = 'block';
+            } else {
+                if (initialLigasMessage) initialLigasMessage.style.display = 'none';
+                if (ligasVisible === 0) {
+                    document.getElementById('noLigasFound').style.display = 'block';
+                } else {
+                    document.getElementById('noLigasFound').style.display = 'none';
+                }
+            }
 
 
+            // Equipos
+            const equiposContainer = document.getElementById('equiposContainer');
+            const equipos = equiposContainer.querySelectorAll('.custom-card');
+            let equiposVisible = 0;
+            let initialEquiposMessage = equiposContainer.querySelector('p:not(.no-results)');
+            
+            equipos.forEach(card => {
+                const nombreEquipo = card.dataset.nombre || '';
+                const nombreLiga = card.dataset.liga || '';
+                if (nombreEquipo.includes(searchTerm) || nombreLiga.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    equiposVisible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (equipos.length === 0) {
+                document.getElementById('noEquiposFound').style.display = 'none';
+                if (initialEquiposMessage) initialEquiposMessage.style.display = 'block';
+            } else {
+                if (initialEquiposMessage) initialEquiposMessage.style.display = 'none';
+                if (equiposVisible === 0) {
+                    document.getElementById('noEquiposFound').style.display = 'block';
+                } else {
+                    document.getElementById('noEquiposFound').style.display = 'none';
+                }
+            }
+
+            // Jugadores
+            const jugadoresContainer = document.getElementById('jugadoresContainer');
+            const jugadores = jugadoresContainer.querySelectorAll('.custom-card');
+            let jugadoresVisible = 0;
+            let initialJugadoresMessage = jugadoresContainer.querySelector('p:not(.no-results)');
+
+            jugadores.forEach(card => {
+                const nombreJugador = card.dataset.nombre || '';
+                const nombreEquipo = card.dataset.equipo || '';
+                const posicionJugador = card.dataset.posicion || '';
+                if (nombreJugador.includes(searchTerm) || nombreEquipo.includes(searchTerm) || posicionJugador.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    jugadoresVisible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (jugadores.length === 0) {
+                document.getElementById('noJugadoresFound').style.display = 'none';
+                if (initialJugadoresMessage) initialJugadoresMessage.style.display = 'block';
+            } else {
+                if (initialJugadoresMessage) initialJugadoresMessage.style.display = 'none';
+                if (jugadoresVisible === 0) {
+                    document.getElementById('noJugadoresFound').style.display = 'block';
+                } else {
+                    document.getElementById('noJugadoresFound').style.display = 'none';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            mostrarSeccion(hash || 'ligas');
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keyup', filterItems);
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

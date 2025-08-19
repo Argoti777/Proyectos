@@ -15,6 +15,7 @@ urlpatterns = [
     path('navbar/',views.navbar, name='navbar'),
     path('footer/',views.footer, name='footer'),
     path('perfil/', views.perfil, name='perfil'),
+    path('chullagol/', views.chullagol, name='chullagol'),
 
 ]
 if settings.DEBUG:
