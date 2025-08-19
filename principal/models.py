@@ -1,42 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
-
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=100)
-    correo = models.EmailField(max_length=100, unique=True)
-    numero = models.CharField(max_length=11, unique=True)
-    contraseña = models.CharField(max_length=255)
-    fecha_registro = models.DateTimeField(auto_now_add=True)
-    rol = models.CharField(max_length=50, default='usuario')
-
-    class Meta:
-        db_table = "Usuarios"
-
-    def __str__(self):
-        return self.nombre
-    
-class Perfil(models.Model):
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='perfil')
-    nombre_completo = models.CharField(max_length=150, blank=True)
-    fecha_nacimiento = models.DateField(null=True, blank=True)
-    genero = models.CharField(
-        max_length=20,
-        choices=[
-            ('masculino', 'Masculino'),
-            ('femenino', 'Femenino'),
-            ('otro', 'Otro'),
-            ('notsay', 'Prefiero no decirlo')
-        ],
-        blank=True
-    )
-
-    class Meta:
-        db_table = "Perfiles"
-
-    def __str__(self):
-        return f"Perfil de {self.usuario.nombre}"
-
 
 class Liga(models.Model):
     nombre = models.CharField(max_length=100)
@@ -44,7 +9,7 @@ class Liga(models.Model):
     ciudad = models.CharField(max_length=100)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    administrador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='ligas')
+    administrador = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ligas')
 
     class Meta:
         db_table = "Ligas"
