@@ -10,8 +10,10 @@
     <meta charset="UTF-8">
     <title>EcuaFut</title>
 </head>
-
-<h1>Nuevo inicio de sesion</h1>
+<body>
+    
+<main class="container">
+    <h1>REGISTRARSE</h1>
 
 {{error}}
 <div>
@@ -21,8 +23,10 @@
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Registrar usuario</button>
         </form>
+        <button type="button" class="btn btn-danger" onclick="history.back()">Cancelar</button>
     </div>
 </div>
+</main>
 
 </body>
 

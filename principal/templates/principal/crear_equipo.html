@@ -15,17 +15,31 @@
     <!-- Aqui empieza nav bar -->
     {% include "principal/navbar_admin.html" %}
     <!-- Aqui termina nav bar -->
+    <main class="container">
+        <h1>Aqui podremos crear Ligas, equipos, jugadores</h1>
 
-    <h1>Aqui podremos crear Ligas, equipos, jugadores</h1>
+        <form method="post" class="card p-4 shadow bg-dark text-white">
+            {% csrf_token %}
 
-    <form action=" " method="post">
+            {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
 
-        {% csrf_token %}
-        {{form.as_p}}
+                {% if field.errors %}
+                <div class="text-danger small">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
 
-        <button type="submit" class="btn btn-primary">Crear equipo</button>
-    </form>
+            <button type="submit" class="btn btn-success w-100">
+                Crear equipo
+            </button>
+        </form>
 
+    </main>
     <!-- FOOTER -->
     {% include "principal/footer.html" %}
     <!-- FOOTER -->

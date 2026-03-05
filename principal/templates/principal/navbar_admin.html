@@ -8,42 +8,45 @@
        <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house-fill"></i> Home</a>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-item text-white" href="#" role="button" data-bs-toggle="dropdown">
-          <i class="bi bi-clipboard2-plus-fill"></i> Crear
+          <i class="bi bi-clipboard2-plus-fill"></i> Ligas
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'crear_liga' %}#ligas">Ligas</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_jugador' %}#jugadores">Jugadores</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_equipo' %}#equipos">Equipos</a></li>
+          <li><a class="dropdown-item" href="{% url 'crear_liga' %}#ligas">Crear</a></li>
+          <li><a class="dropdown-item" href="{% url 'visualizar_liga' %}#jugadores">Vizualizar</a></li>
         </ul>
       </div>
       <!-- Actualizar Dropdown -->
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-item text-white" href="#" role="button" data-bs-toggle="dropdown">
-          <i class="bi bi-arrow-up-circle-fill"></i> Actualizar
+          <i class="bi bi-arrow-up-circle-fill"></i> Equipos
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'crear_liga' %}#ligas">Ligas</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_jugador' %}#jugadores">Jugadores</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_equipo' %}#equipos">Equipos</a></li>
+          <li><a class="dropdown-item" href="{% url 'crear_equipo' %}#ligas">Crear</a></li>
+          <li><a class="dropdown-item" href="{% url 'visualizar_equipo' %}#equipos">Visualizar</a></li>
         </ul>
       </div>
       <!-- Eliminar Dropdown -->
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-item text-white" href="#" role="button" data-bs-toggle="dropdown">
-          <i class="bi bi-trash-fill"></i> Eliminar
+          <i class="bi bi-people-fill"></i> Jugadores
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'crear_liga' %}#ligas">Ligas</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_jugador' %}#jugadores">Jugadores</a></li>
-          <li><a class="dropdown-item" href="{% url 'crear_equipo' %}#equipos">Equipos</a></li>
+          <li><a class="dropdown-item" href="{% url 'crear_jugador' %}#ligas">Crear</a></li>
+          <li><a class="dropdown-item" href="{% url 'visualizar_jugador' %}#jugadores">Visualizar</a></li>
         </ul>
       </div>
+      <a class="nav-link active" href="{% url 'prueba' %}"><i class="bi bi-calendar3"></i> Calendario</a>
+      <a class="nav-link active" href="{% url 'mi_partido' %}"><i class="bi bi-cookie"></i> Mis partidos</a>
+      {% if user.is_superuser %}
+      <a class="nav-link active" href="{% url 'recargar_saldo' %}"><i class="bi bi-coin"></i> Recargar saldo</a>
+       {% endif %}
     </div>
+    
+    
 
     <!-- Logo al centro -->
-    <div class="text-center">
-      <img src="{% static 'principal/imagenes/logo2.png' %}" alt="Logo EcuaFut" height="40">
-    </div>
+      
+
 
     <!-- Lado derecho -->
 
@@ -56,12 +59,9 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
-            <a class="dropdown-item" href="{% url 'ayuda' %}"><i class="bi bi-person-fill"></i> Perfil</a>
-          </li>
-          <li>
             <a class="dropdown-item" href="{% url 'ayuda' %}"><i class="bi bi-question-lg"></i> Ayuda</a>
           </li>
-          {% if user.is_superuser %}
+          {% if user.is_staff %}
           <li>
             <a class="dropdown-item" href="{% url 'adminis' %}"><i class="bi bi-gear"></i> Administrador</a>
           </li>
