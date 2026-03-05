@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Campeonato - EcuaFut</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'principal/style.css' %}">
+</head>
+
+<body>
+    {% include 'principal/navbar.html' %}
+
+    <h2>Apostar en {{ partido }}</h2>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body text-center">
+
+            <h5 class="mb-3">Probabilidades del partido</h5>
+
+            <div class="row">
+
+                <div class="col">
+                    <strong>{{ partido.equipo_local.nombre }}</strong><br>
+                    {{ probs.local|floatformat:2 }}% <br>
+                    Cuota: {{ cuota.local }}
+                </div>
+
+                <div class="col">
+                    <strong>Empate</strong><br>
+                    {{ probs.empate|floatformat:2 }}% <br>
+                    Cuota: {{ cuota.empate }}
+                </div>
+
+                <div class="col">
+                    <strong>{{ partido.equipo_visitante.nombre }}</strong><br>
+                    {{ probs.visitante|floatformat:2 }}% <br>
+                    Cuota: {{ cuota.visitante }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4" style="max-width:600px;">
+        <form method="post" class="card p-4 shadow bg-dark text-white">
+            {% csrf_token %}
+
+            <h4 class="text-center mb-4">Realizar apuesta</h4>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    {{ form.tipo.label }}
+                </label>
+                {{ form.tipo }}
+            </div>
+
+            <div id="campo-ganador" class="mb-3">
+                <label class="form-label fw-bold">
+                    {{ form.seleccion_ganador.label }}
+                </label>
+                {{ form.seleccion_ganador }}
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    {{ form.monto.label }}
+                </label>
+                {{ form.monto }}
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">
+                    Confirmar apuesta
+                </button>
+
+                <a href="{% url 'chullagol' %}" class="btn btn-outline-light">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+    {% include 'principal/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tipo = document.getElementById("id_tipo");
+            const campoGanador = document.getElementById("campo-ganador");
+            const campoGoles = document.getElementById("campo-goles");
+
+            function actualizarCampos() {
+                if (tipo.value === "ganador") {
+                    campoGanador.style.display = "block";
+                    campoGoles.style.display = "none";
+                } else if (tipo.value === "overunder") {
+                    campoGanador.style.display = "none";
+                    campoGoles.style.display = "block";
+                } else {
+                    campoGanador.style.display = "none";
+                    campoGoles.style.display = "none";
+                }
+            }
+
+            tipo.addEventListener("change", actualizarCampos);
+            actualizarCampos(); // Ejecutar al cargar
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const boton = document.querySelector("button[type='submit']");
+            const form = document.querySelector("form");
+            const campos = form.querySelectorAll("select, input");
+
+
+            function validarFormulario() {
+                let valido = true;
+
+                campos.forEach(campo => {
+                    if (
+                        campo.closest("div") &&
+                        campo.closest("div").style.display !== "none" &&
+                        !campo.value
+                    ) {
+                        valido = false;
+                    }
+                });
+
+                boton.disabled = !valido;
+            }
+
+            campos.forEach(campo => {
+                campo.addEventListener("input", validarFormulario);
+                campo.addEventListener("change", validarFormulario);
+            });
+
+            validarFormulario();
+        });
+    </script>
+
+</body>
+
+</html>

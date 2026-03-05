@@ -1,0 +1,29 @@
+<h1>Mis apuestas</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Partido</th>
+        <th>Tipo</th>
+        <th>Detalle</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+    </tr>
+
+    {% for a in apuestas %}
+    <tr>
+        <td>{{ a.partido }}</td>
+        <td>{{ a.tipo }}</td>
+        <td>
+            {% if a.tipo == "ganador" %}
+                Ganador: {{ a.seleccion_ganador }}
+            {% else %}
+                {{ a.over_under }} {{ a.linea_goles }}
+            {% endif %}
+        </td>
+        <td>{{ a.monto }}</td>
+        <td>{{ a.fecha }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="/" class="btn btn-primary">Volver</a>

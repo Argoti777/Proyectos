@@ -16,20 +16,68 @@
     {% include "principal/navbar_admin.html" %}
     <!-- Aqui termina nav bar -->
 
-    <h1>Aqui podremos crear Ligas, equipos, jugadores</h1>
+    <main class="container">
+        <h1>Aqui podremos crear Ligas, equipos, jugadores</h1>
 
-    <form action=" " method="post">
+        <form method="post" class="card p-4 shadow bg-dark text-white">
+            {% csrf_token %}
 
-        {% csrf_token %}
-        {{form.as_p}}
+            {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
 
-        <button type="submit" class="btn btn-primary">Crear liga</button>
-    </form>
+                {% if field.errors %}
+                <div class="text-danger small">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-success w-100">
+                Crear liga
+            </button>
+        </form>
+
+    </main>
 
     <!-- FOOTER -->
     {% include "principal/footer.html" %}
     <!-- FOOTER -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const fechaInicio = document.getElementById('fecha_inicio');
+            const fechaFin = document.getElementById('fecha_fin');
+
+            const hoy = new Date();
+            hoy.setDate(hoy.getDate() + 1); // mañana
+
+            const manana = hoy.toISOString().split('T')[0];
+            fechaInicio.min = manana;
+
+            fechaInicio.addEventListener('change', function () {
+                const inicio = new Date(this.value);
+
+                if (!this.value) return;
+
+                const minFin = new Date(inicio);
+                minFin.setDate(minFin.getDate() + 30);
+
+                const minFinStr = minFin.toISOString().split('T')[0];
+
+                fechaFin.min = minFinStr;
+
+                // Si la fecha_fin actual es inválida, la ajusta automáticamente
+                if (fechaFin.value && fechaFin.value < minFinStr) {
+                    fechaFin.value = minFinStr;
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>
