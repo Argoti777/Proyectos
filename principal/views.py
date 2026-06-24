@@ -19,6 +19,8 @@ import random
 from datetime import datetime, timedelta, time
 from itertools import combinations
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 # Funcion para negar el acceso a usuarios que no son superusuarios
 
 
@@ -47,12 +49,13 @@ def registrar(request):
             'form': form,
         })
 
-
+@never_cache
+@login_required
 def cerrar_sesion(request):
     logout(request)
     return redirect('home')
 
-
+@never_cache
 def logon(request):
     if request.method == 'GET':
         return render(request, 'principal/login.html', {
@@ -259,7 +262,6 @@ def apostar(request, partido_id):
 
 
 
-
 @login_required
 def apuesta_exitosa(request):
     return render(request, "principal/apuesta_exitosa.html")
@@ -273,34 +275,7 @@ def historial_apuestas(request):
         "apuestas": apuestas
     })
 
-def es_ganadora(self):
-    partido = self.partido
 
-    # Solo evaluar si el partido terminó
-    if partido.estado != 'finalizado':
-        return False
-
-    # 🔹 Apuesta tipo GANADOR
-    if self.tipo == 'ganador':
-        if partido.goles_local > partido.goles_visitante:
-            resultado = 'local'
-        elif partido.goles_local < partido.goles_visitante:
-            resultado = 'visitante'
-        else:
-            resultado = 'empate'
-
-        return self.seleccion_ganador == resultado
-
-    # 🔹 Apuesta tipo OVER / UNDER
-    elif self.tipo == 'overunder':
-        total_goles = partido.goles_local + partido.goles_visitante
-
-        if self.over_under == 'over':
-            return total_goles > self.linea_goles
-        elif self.over_under == 'under':
-            return total_goles < self.linea_goles
-
-    return False
 # Vistas para administrador
 
 @staff_member_required
@@ -451,19 +426,19 @@ def crear_jugador(request):
         return render(request, 'principal/crear_jugador.html', {
             'form': crearJugadorForm(user=request.user)
         })
+
     else:
-        try:
-            form = crearJugadorForm(
-                request.POST, user=request.user)  # ojo aquí)
+        form = crearJugadorForm(request.POST, user=request.user)
+
+        if form.is_valid():   
             nuevo_jugador = form.save(commit=False)
             nuevo_jugador.administrador = request.user
             nuevo_jugador.save()
             return redirect('crear_jugador')
-        except ValueError:
-            return render(request, 'principal/crear_jugador.html', {
-                'form': crearJugadorForm(user=request.user),
-                'error': 'Por favor ingrese datos válidos'
-            })
+
+        return render(request, 'principal/crear_jugador.html', {
+            'form': form
+        })
 
 
 @staff_member_required
@@ -886,3 +861,10 @@ def abrir_apuestas_partido(request, partido_id):
 
     abrir_apuestas(partido)
     return redirect('administrar_partido', partido_id=partido.id)
+
+
+
+
+
+
+

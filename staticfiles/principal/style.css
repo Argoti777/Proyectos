@@ -1,0 +1,321 @@
+/* =====================================================
+   BASE GLOBAL
+===================================================== */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #007A33;
+  font-family: 'Teko', sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+h1 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin: 30px 0;
+  color: #fff;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.glass-navbar {
+    position: fixed;
+    top: 20px;              /* mantiene separación superior */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90%;
+    max-width: 1100px;
+
+    z-index: 9999;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 12px 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  margin-right: 16px;
+  font-size: 1.5rem !important;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #c2ffdf !important;
+}
+
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  border: none;
+}
+
+.dropdown-item {
+  color: #000;
+}
+
+.dropdown-item:hover {
+  background: rgba(55, 255, 0, 0.1);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   GRID LISTADOS
+===================================================== */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+.custom-card {
+  background: #121212;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.3s ease-in-out;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.custom-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 255, 120, 0.3);
+}
+
+.custom-card h3,
+.custom-card h4 {
+  margin: 10px 0 5px;
+}
+
+.custom-card p {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #d1d1d1;
+}
+
+.custom-card img {
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.custom-card img[alt="Jugador"],
+.custom-card img[alt="Jugador por defecto"] {
+  border-radius: 50%;
+}
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #003f2d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background: #005540;
+  transform: scale(1.02);
+}
+
+/* =====================================================
+   BUSCADOR
+===================================================== */
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-container input[type="text"] {
+  width: 100%;
+  padding: 10px 15px 10px 45px;
+  border-radius: 50px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  pointer-events: none;
+}
+
+/* =====================================================
+   CHULLAGOL (CASA DE APUESTAS)
+===================================================== */
+
+.chullagol-container {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+.chullagol-main {
+  flex: 2;
+}
+
+.chullagol-aside {
+  flex: 1;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 300px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.chullagol-card {
+  background-color: #000;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 115, 0.2);
+}
+
+.chullagol-bet-button,
+.bet-button {
+  width: 100%;
+  background-color: #0d463c;
+  color: #f8f8f8;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chullagol-bet-button:hover,
+.bet-button:hover {
+  background-color: #256839;
+}
+
+/* =====================================================
+   SELECT2 FIX COMPLETO
+===================================================== */
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #000 !important;
+}
+
+/* Placeholder */
+.select2-container--default .select2-selection__placeholder {
+  color: #000 !important;
+}
+
+/* Texto del buscador interno */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  color: #000 !important;
+}
+
+/* Opciones normales del dropdown */
+.select2-container--default .select2-results__option {
+  color: #000 !important;
+}
+
+/* Opción seleccionada */
+.select2-container--default .select2-results__option--selected {
+  color: #000 !important;
+}
+
+/* Opción resaltada (hover) */
+.select2-container--default .select2-results__option--highlighted {
+  color: #000 !important;
+}
+
+/* Forzar fondo blanco del dropdown */
+.select2-dropdown {
+  background: #fff !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+  .chullagol-container {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+body {
+    padding-top: 90px; /* ajusta según altura real del navbar */
+}
+
+.dropdown-menu {
+    z-index: 6000 !important;
+}

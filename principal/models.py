@@ -8,7 +8,7 @@ from django.db import models
 
 
 class Liga(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, unique=True)
     pais = models.CharField(max_length=100)
     ciudad = models.CharField(max_length=100)
     descripcion = models.TextField(null=True, blank=True, max_length=2000)

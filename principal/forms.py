@@ -1,8 +1,7 @@
 from django import forms
 from .models import *
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
-
+from .services.validators import validar_cedula
 
 from django import forms
 from django.utils import timezone
@@ -64,6 +63,12 @@ class crearJugadorForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if user:
             self.fields['equipo'].queryset = Equipo.objects.filter(liga__administrador=user)
+    
+    def clean_cedula(self):
+        cedula = self.cleaned_data['cedula']
+        if not validar_cedula(cedula):
+                raise forms.ValidationError("La cédula no es válida en Ecuador")
+        return cedula
 
 class LoginForm(forms.Form):
     correo_o_numero = forms.CharField()
